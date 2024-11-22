@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import *
-from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import User
 from rest_framework import generics
@@ -25,6 +24,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])  # Hash the password
         user.save()
         return user
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,36 +71,3 @@ class UserSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('email', 'first_name', 'last_name', 'password', 'role')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User(**validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
-
-class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField()
-
-    def validate(self, attrs):
-        user = authenticate(**attrs)
-        if user:
-            return user
-        raise serializers.ValidationError('Invalid credentials')
-
-class LogoutSerializer(serializers.Serializer):
-    message = serializers.CharField(default="Successfully logged out.")    
-
-class LogoutView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = LogoutSerializer  
-
-    def post(self, request, *args, **kwargs):
-        logout(request)
-        return Response({"message": "Successfully logged out."})    

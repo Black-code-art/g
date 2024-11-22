@@ -1,12 +1,11 @@
 from django.db import models
 import uuid
-from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,AbstractUser
+from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from .managers import UserManager
 from django.contrib.auth.models import User
-from django.conf import settings
+from django.db import models
 
-
-class User(AbstractBaseUser,PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     
     Role = {
         ('admin', 'admin'),
@@ -42,8 +41,6 @@ class Role(models.TextChoices):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=2, choices=Role.choices)
-    def __str__(self):
-        return self.user.email
 
 class Vehicle(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -93,6 +90,3 @@ class Driver(models.Model):
 class RouteOptimization(models.Model) :
     delivery_addresses =models.TextField()  
     optimized_route_details = models.TextField()  
-
-
-

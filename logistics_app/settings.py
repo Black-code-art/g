@@ -65,7 +65,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'logistics_app.urls'
 
-AUTH_USER_MODEL = 'logistics.User'
+
+AUTH_USER_MODEL = 'logistics.User'  
 
 TEMPLATES = [
     {
