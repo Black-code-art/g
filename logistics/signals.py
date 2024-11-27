@@ -37,3 +37,5 @@ def welcome_user_mail(sender,instance,created, **kwargs):
               messages: Dear Admin, welcome to veil logistics . We are glad to have here. Expore  our website and enjoy the services we offer.
 
             """)
+
+
