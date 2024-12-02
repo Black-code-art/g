@@ -85,7 +85,7 @@ class Inventory(models.Model):
     restock_level = models.IntegerField 
 class Driver(models.Model):
     driver_id =models.CharField(max_length=50, unique= True)
-    vehicle_details = models.CharField(max_length=100)
+    vehicle_details = models.CharField(max_length=500)
 
 class RouteOptimization(models.Model) :
     delivery_addresses =models.TextField()  
