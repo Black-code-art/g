@@ -14,7 +14,7 @@ def redirect_to_swagger(request):
 def welcome(request):
     return JsonResponse(
         {
-            "message": "Welcome to Gobal logistics",
+            "message": "Welcome to Veil logistics",
             "status": 200,
         }
     )
