@@ -43,7 +43,6 @@ class Profile(models.Model):
     role = models.CharField(max_length=2, choices=Role.choices)
 
 class Vehicle(models.Model):
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     vehicle_type = models.CharField(max_length=100)
     license_plate = models.CharField(max_length=20)
 
