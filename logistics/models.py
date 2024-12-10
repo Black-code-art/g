@@ -88,4 +88,4 @@ class Driver(models.Model):
 
 class RouteOptimization(models.Model) :
     delivery_addresses =models.TextField()  
-    optimized_route_details = models.TextField()  
+    optimized_route_details = models.TextField()
