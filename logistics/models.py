@@ -39,7 +39,7 @@ class Role(models.TextChoices):
     CUSTOMER = 'CU', 'Customer'
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     role = models.CharField(max_length=2, choices=Role.choices)
 
 class Vehicle(models.Model):

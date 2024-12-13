@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from rest_framework import status
+from rest_framework_simplejwt.authentication import JWTAuthentication 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from rest_framework.response import Response
@@ -30,9 +31,27 @@ class SignupView(generics.CreateAPIView):
         }, status=status.HTTP_201_CREATED)
 
 class ProfileViewSet(viewsets.ModelViewSet):
+
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
+
+    def create(self, request, *args, **kwargs):
+        user = request.user
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer.validated_data['user'] = user
+
+        self.perform_create(serializer)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+   
 class VehicleViewSet(viewsets.ModelViewSet):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
@@ -56,7 +75,7 @@ class InventoryListView(generics.ListAPIView):
     serializer_class = InventorySerializer
     def get_queryset(self):
         warehouse_id = self.kwargs['warehouse_id']
-        return Inventory,object,filter(warehouse_id = warehouse_id)
+        return Inventory.object.filter(warehouse_id = warehouse_id)
 
 class RouteOptimizationView(generics.CreateAPIView):
     queryset = RouteOptimization.objects.all()
