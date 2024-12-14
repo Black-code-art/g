@@ -2,7 +2,7 @@ import random
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save
 from django.contrib.auth import get_user_model
-from logistics_app import settings
+from config import settings
 import time 
 from django.utils import  timezone
 from .models import *
