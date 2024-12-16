@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import find_dotenv, load_dotenv
+import uuid
 
 load_dotenv(find_dotenv())
 
@@ -19,3 +20,10 @@ def process_weather(query):
     else:
 
         return {"message": "An error occured"}, False
+
+
+
+
+def generate_tracking_id():
+
+    return str(uuid.uuid4())[:8]

@@ -26,40 +26,16 @@ class UserSignupSerializer(serializers.ModelSerializer):
         return user
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = '__all__'
-
-class VehicleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vehicle
-        fields = '__all__'
-
-class JobSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Job
-        fields = '__all__'
-
 class ShipmentSerializer(serializers.ModelSerializer):
+
+    customer_data = serializers.ReadOnlyField()
+    driver_data = serializers.ReadOnlyField()
     class Meta:
         model = Shipment
         fields = '__all__'
 
-class InventorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Inventory
-        fields = '__all__'
 
-class DriverSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Driver
-        fields = '__all__'
 
-class RouteOptimizationSerializer(serializers.ModelSerializer):
-    class Meta :
-        model =  RouteOptimization
-        fields = '__all__'
         
 class UserSerializer(serializers.ModelSerializer):
 
@@ -67,6 +43,9 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = "__all__"
+
+
+
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
