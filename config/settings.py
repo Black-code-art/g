@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'dj_database_url',
+    
+
     
 ]
 REST_FRAMEWORK = {
